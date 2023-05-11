@@ -1,0 +1,14 @@
+{
+    "autoload": {
+        "classmap": [
+            "class",
+            "controller",
+            "model",
+            "view"
+        ]
+    },
+    "require": {
+        "altorouter/altorouter": "^2.0",
+        "twig/twig": "^3.0"
+    }
+}
