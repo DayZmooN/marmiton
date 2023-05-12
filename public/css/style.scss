@@ -123,11 +123,18 @@ body {
         width: 100%;
         height: auto;
 
+        @media screen and (min-width:900px) {
+            width: 100%;
+            max-width: 100%;
+        }
+
         //section heros
         .hero {
             background-image: url(../img/chef-adobe-233304884.webp);
-            height: 50vh;
+            height: 30vw;
+            width: 100%;
             background-repeat: no-repeat;
+            background-size: cover;
             display: flex;
             align-items: center;
 
@@ -171,7 +178,6 @@ body {
 
 
             .card_container {
-                width: 100%;
                 align-items: center;
                 display: flex;
                 flex-wrap: wrap;

@@ -20,6 +20,9 @@ class ComposerStaticInit6848f6eba5f3f0e953d2c59bf8b3ad86
         array (
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Ctype\\' => 23,
+            'Symfony\\Contracts\\Translation\\' => 30,
+            'Symfony\\Component\\Asset\\' => 24,
+            'Symfony\\Bridge\\Twig\\' => 20,
         ),
     );
 
@@ -36,18 +39,35 @@ class ComposerStaticInit6848f6eba5f3f0e953d2c59bf8b3ad86
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
+        'Symfony\\Contracts\\Translation\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/translation-contracts',
+        ),
+        'Symfony\\Component\\Asset\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/asset',
+        ),
+        'Symfony\\Bridge\\Twig\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/twig-bridge',
+        ),
     );
 
     public static $classMap = array (
         'AltoRouter' => __DIR__ . '/..' . '/altorouter/altorouter/AltoRouter.php',
-        'Categories' => __DIR__ . '/../..' . '/model/Categories.php',
+        'Categories' => __DIR__ . '/../..' . '/class/categories.php',
+        'CategoriesModel' => __DIR__ . '/../..' . '/model/Categoriesmodel.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Controller' => __DIR__ . '/../..' . '/controller/Controller.php',
-        'Ingredients' => __DIR__ . '/../..' . '/model/Ingredients.php',
+        'Ingredients' => __DIR__ . '/../..' . '/class/Ingredients.php',
+        'IngredientsModel' => __DIR__ . '/../..' . '/model/IngredientsModel.php',
         'Model' => __DIR__ . '/../..' . '/model/Model.php',
-        'Post' => __DIR__ . '/../..' . '/class/Post.php',
-        'PostController' => __DIR__ . '/../..' . '/controller/RecipesController.php',
-        'PostModel' => __DIR__ . '/../..' . '/model/RecipesModel.php',
+        'RecipeController' => __DIR__ . '/../..' . '/controller/RecipesController.php',
+        'RecipeModel' => __DIR__ . '/../..' . '/model/RecipesModel.php',
+        'Recipes' => __DIR__ . '/../..' . '/class/Recipes.php',
+        'User' => __DIR__ . '/../..' . '/class/user.php',
+        'UserController' => __DIR__ . '/../..' . '/controller/UserController.php',
+        'UserModel' => __DIR__ . '/../..' . '/model/userModel.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

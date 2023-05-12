@@ -1,0 +1,14 @@
+{% extends "template.html.twig" %}
+
+{% block style %}{% endblock %}
+{% block content %}
+	<section
+		class="recipe_post">
+		{# {% for recipe in recipes %}{% endfor %} #}
+		<div class="recipe">
+			<h1>{{recipe.title}}</h1>
+
+			<img src="{{ style }}img/{{ recipe.thumbnail }}" alt="{{ recipe.title }}">
+		</div>
+	</section>
+{% endblock %}

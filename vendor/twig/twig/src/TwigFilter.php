@@ -14,6 +14,7 @@ namespace Twig;
 use Twig\Node\Expression\FilterExpression;
 use Twig\Node\Node;
 
+
 /**
  * Represents a template filter.
  *

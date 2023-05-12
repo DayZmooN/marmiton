@@ -1,0 +1,22 @@
+{% extends "template.html.twig" %}
+
+{% block title %}
+	inscription
+{% endblock %}
+
+{% block style %}{% endblock %}
+
+{% block content %}
+	<div class="form">
+		<div class="container-form">
+			<h1>Créer votre compte LaRecette</h1>
+			<form action="{{ link }}" method="post">
+				<input type="text" name="email" id="email" placeholder="Adresse e-mail">
+				<input type="text" name="username" id="username" placeholder="Nom d'utilisateur">
+				<input type="password" name="password" id="password" placeholder="Mot de passe">
+				<button class="connection" type="button">Se connecter</button>
+				<input class="registration" type="submit" value="Envoyer">
+			</form>
+		</div>
+	</div>
+{% endblock %}

@@ -4,21 +4,13 @@
 	Bienvenue sur la page d'acceuil
 {% endblock %}
 
+
 {% block content %}
-	{# <ul>
-																																																																												{% for recipe in recipes %}
-																																																																													<li>
-																																																																														<h1>{{ recipe.title }}</h1>
-																																																																													</li>
-																																																																												{% endfor %}
-																																																																											</ul> #}
-
 	{# section hero #}
-		<section class="hero"> <div class="container-hero">
+	<section class="hero">
+		<div class="container-hero">
 			<h1>RECETTE ET CONSEILS DE CHEF POUR LES RÉUSSIR</h1>
-
 		</div>
-
 	</section>
 
 	{# section recette du jour  #}
@@ -27,41 +19,23 @@
 		<h1>Recette du jour
 		</h1>
 		<div class="slider_container_cards">
-			<div class="card_container">
-				<div class="card">
-					<div class="img-box">
-						<img src="./img/2217290_w472h265c1cx600cy300cxt0cyt0cxb1200cyb600.webp" alt="fraisier"></div>
-					<div class="details_recipe">
-						<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Numquam et aperiam tempora</p>
+			{% for recipe in recipes %}
+				<div class="card_container">
+
+					<div class="card">
+
+						<a href="{{link}}{{recipe.id_recipes}}">
+							<div class="img-box">
+								<img src="./public/img/{{ recipe.thumbnail }}" alt="{{ recipe.title }}">
+
+							</div>
+							<div class="details_recipe">
+								<h2>{{recipe.title}}</h2>
+								<p>{{recipe.content}}</p>
+							</div>
+						</a>
 					</div>
-				</div>
-			</div>
-			<div class="card_container">
-				<div class="card">
-					<div class="img-box">
-						<img src="./img/2217290_w472h265c1cx600cy300cxt0cyt0cxb1200cyb600.webp" alt="fraisier"></div>
-					<div class="details_recipe">
-						<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Numquam et aperiam tempora</p>
-					</div>
-				</div>
-			</div>
-			<div class="card_container">
-				<div class="card">
-					<div class="img-box">
-						<img src="./img/2217290_w472h265c1cx600cy300cxt0cyt0cxb1200cyb600.webp" alt="fraisier"></div>
-					<div class="details_recipe">
-						<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Numquam et aperiam tempora</p>
-					</div>
-				</div>
-			</div>
-			<div class="card_container">
-				<div class="card">
-					<div class="img-box">
-						<img src="./img/2217290_w472h265c1cx600cy300cxt0cyt0cxb1200cyb600.webp" alt="fraisier"></div>
-					<div class="details_recipe">
-						<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Numquam et aperiam tempora</p>
-					</div>
-				</div>
+				{% endfor %}
 			</div>
 
 

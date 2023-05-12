@@ -16,6 +16,7 @@ use Twig\Error\Error;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 
+
 /**
  * Default base class for compiled templates.
  *
@@ -213,7 +214,9 @@ abstract class Template
         if ($this->env->isDebug()) {
             ob_start();
         } else {
-            ob_start(function () { return ''; });
+            ob_start(function () {
+                return '';
+            });
         }
         $this->displayParentBlock($name, $context, $blocks);
 
@@ -238,7 +241,9 @@ abstract class Template
         if ($this->env->isDebug()) {
             ob_start();
         } else {
-            ob_start(function () { return ''; });
+            ob_start(function () {
+                return '';
+            });
         }
         $this->displayBlock($name, $context, $blocks, $useBlocks);
 
@@ -373,7 +378,9 @@ abstract class Template
         if ($this->env->isDebug()) {
             ob_start();
         } else {
-            ob_start(function () { return ''; });
+            ob_start(function () {
+                return '';
+            });
         }
         try {
             $this->display($context);

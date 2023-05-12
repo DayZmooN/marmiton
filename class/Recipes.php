@@ -1,15 +1,16 @@
 <?php
-class Post
+class Recipes
 {
-
     private $id_recipes;
     private $title;
     private $slug;
     private $duration;
     private $user_id;
+    private $thumbnail;
+    private $content;
 
 
-    public function __construct(array  $datas)
+    public function __construct(array $datas)
     {
         $this->hydrate($datas);
     }
@@ -29,6 +30,10 @@ class Post
     {
         $this->title = $title;
     }
+    public function setThumbnail(string $thumbnail)
+    {
+        $this->thumbnail = $thumbnail;
+    }
     public function setId_recipes(int $id_recipes)
     {
         $this->id_recipes = $id_recipes;
@@ -40,6 +45,10 @@ class Post
     public function setDuration(int $duration)
     {
         $this->duration = $duration;
+    }
+    public function setContent(string $content)
+    {
+        $this->content = $content;
     }
 
     public function setUser_id(int $user_id)
@@ -69,5 +78,13 @@ class Post
     public function getUser_id()
     {
         return $this->user_id;
+    }
+    public function getThumbnail()
+    {
+        return $this->thumbnail;
+    }
+    public function getContent()
+    {
+        return $this->content;
     }
 }

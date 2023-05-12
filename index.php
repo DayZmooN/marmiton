@@ -1,5 +1,8 @@
 <?php
 
+// inclusion du fichier config.php
+// require_once './config/config.php';
+
 // Chargement des dépendances
 // Chargement de l'autoloader de Composer
 require_once './vendor/altorouter/altorouter/AltoRouter.php'; // Chargement de la classe AltoRouter
@@ -11,10 +14,18 @@ $router = new AltoRouter();
 $router->setBasePath('/php/marmiton'); // Chemin de base pour les URL
 
 // Mappage des routes avec les actions du contrôleur
-$router->map('GET', '/', 'PostController#homePage', 'home');
-// Page d'accueil
-// $router->map('GET', '/post/', '', 'basePost');
-// $router->map('GET', '/post/[i:id]', 'PostController#getOne', 'getOneRecipe'); // Article unique par ID
+$router->map('GET', '/', 'RecipeController#homePage', 'home'); // Page d'accueil
+$router->map('GET', '/recette/', '', 'baseRecette');
+$router->map('GET', '/recette/[i:id_recipe]', 'RecipeController#getOne', 'recette'); // Article unique par ID
+
+
+$router->map('GET', '/recette/inscription', 'UserController#registrationPage',  'baseRegistration');
+
+//envoi de donner inscription
+$router->map('POST', '/recette/', 'baseRegistrationInscription');
+$router->map('POST', '/inscription ', 'UserController#registrationPage', 'baseRegistrationInscription');
+
+
 
 
 

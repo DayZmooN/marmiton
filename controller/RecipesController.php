@@ -1,46 +1,38 @@
 <?php
-class PostController extends Controller
+class RecipeController extends Controller
 {
-    // private function getTwig()
-    // {
-    //     $loader = new \Twig\Loader\FilesystemLoader('./view');
-
-    //     return new \Twig\Environment($loader, [
-    //         'cache' => false,
-    //     ]);
-    // }
 
     public function homePage()
     {
         global $router;
-        $model = new PostModel();
+        $model = new RecipeModel();
         $datas = $model->getAllRecipes();
-
         $twig = $this->getTwig();
-
         // Activer la compression Gzip
-        // ob_start("ob_gzhandler");
+        ob_start("ob_gzhandler");
 
         //sert a debug ton twig
         // $twig->addExtension(new \Twig\Extension\DebugExtension());
         // var_dump($datas);
-        echo $twig->render('homePage.html.twig', ['recipes' => $datas]);
+        $link = $router->generate('baseRecette');
+        $linkRegistration = $router->generate('baseRegistration');
+        echo $twig->render('homePage.html.twig', ['recipes' => $datas, 'link' => $link, 'linkRegistration' => $linkRegistration]);
 
 
         // Fin de la compression
-        // ob_end_flush();
+        ob_end_flush();
     }
 
-    public function getOne(int $id)
+    public function getOne(int $id_recipe)
     {
-        $model = new PostModel();
-        $recipe = $model->getOneRecipe($id);
+        global $router;
+        $model = new RecipeModel();
+        $recipe = $model->getOneRecipe($id_recipe);
         $twig = $this->getTwig();
-
+        $OneRecipe = $router->generate('recette');
         // Activer la compression Gzip
         ob_start("ob_gzhandler");
-
-        echo $twig->render('onePost.html.twig', ['recipe' => $recipe]);
+        echo $twig->render('OneRecipe.html.twig', ['recipe' => $recipe, 'OneRecipe' => $OneRecipe]);
 
         // Envoyer les en-têtes pour la compression Gzip
         header('Content-Encoding: gzip');
