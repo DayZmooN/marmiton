@@ -1,14 +1,95 @@
 {% extends "template.html.twig" %}
 
 {% block style %}{% endblock %}
-{% block content %}
-	<section
-		class="recipe_post">
-		{# {% for recipe in recipes %}{% endfor %} #}
-		<div class="recipe">
-			<h1>{{recipe.title}}</h1>
 
-			<img src="{{ style }}img/{{ recipe.thumbnail }}" alt="{{ recipe.title }}">
+{% block content %}
+	<!-- section one recipe -->
+	<section class="recipe_post">
+		<div class="recipe">
+			<h1 class="title-text">{{ recipe.title }}</h1>
+			<img class="img-recipe" src="{{ style }}img/{{ recipe.thumbnail }}" alt="{{ recipe.title }}">
+		</div>
+		<div class="time">
+			<span class="time-bdd">Temps :
+				<snap>{{ recipe.duration }}</snap>
+				<span>Minutes</span>
+			</span>
+		</div>
+		<div class="ingredients-container">
+			<div class="one-ingredient-container">
+				<h2>Ingredients :</h2>
+				<div class="one-ingredient">
+					<img class="img-ingredient" src="../public/img/vecteezy_strawberry-icon-isolated-on-white-vector-illustration_5634168-removebg-preview.png" alt="">
+					<span class="span-text-ingredient">fraise</span>
+				</div>
+				<!-- Répéter les blocs d'ingrédients pour chaque élément -->
+			</div>
+		</div>
+		<!--preparation recipe -->
+		<div class="one-preparation-recipe">
+			<h3 class="title-prepartion-h3">Préparation :</h3>
+			<div
+				class="prepartion-recipe">
+				<!-- Répéter les étapes de préparation pour chaque étape -->
+				<p class="p-preparation">
+					Etape 1 :
+					<span>couper les fraises en deux</span>
+				</p>
+				<p class="p-preparation">
+					Etape 1 :
+					<span>couper les fraises en deux</span>
+				</p>
+				<p class="p-preparation">
+					Etape 1 :
+					<span>couper les fraises en deux</span>
+				</p>
+				<p class="p-preparation">
+					Etape 1 :
+					<span>couper les fraises en deux</span>
+				</p>
+				<!-- Autres étapes de préparation -->
+			</div>
 		</div>
 	</section>
+
+	<section class="section-recipe-slide-today">
+		<div class="container-cards">
+			<div class="card">
+				<div class="image">
+					<img src="../public/img/recette-madeleine-1068x601.webp" alt="">
+				</div>
+				<div class="content">
+					<p class="p-content">La madeleine est une espèce rare dans la nature dont la durée de vie ne dépasse pas une semaine. La madeleine a la vie dure</p>
+					<a href="#">Voir Plus</a>
+				</div>
+			</div>
+			<!-- Répéter les cartes pour chaque élément -->
+		</div>
+
+		<div class="container-cards">
+			<div class="card">
+				<div class="image">
+					<img src="../public/img/recette-madeleine-1068x601.webp" alt="">
+				</div>
+				<div class="content">
+					<p class="p-content">La madeleine est une espèce rare dans la nature dont la durée de vie ne dépasse pas une semaine. La madeleine a la vie dure</p>
+					<a href="#">Voir Plus</a>
+				</div>
+			</div>
+			<!-- Répéter les cartes pour chaque élément -->
+		</div>
+		<div class="container-cards">
+			<div class="card">
+				<div class="image">
+					<img src="../public/img/recette-madeleine-1068x601.webp" alt="">
+				</div>
+				<div class="content">
+					<p class="p-content">La madeleine est une espèce rare dans la nature dont la durée de vie ne dépasse pas une semaine. La madeleine a la vie dure</p>
+					<a href="#">Voir Plus</a>
+				</div>
+			</div>
+			<!-- Répéter les cartes pour chaque élément -->
+		</div>
+	</section>
+
 {% endblock %}
