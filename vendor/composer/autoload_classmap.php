@@ -19,5 +19,5 @@ return array(
     'Recipes' => $baseDir . '/class/Recipes.php',
     'User' => $baseDir . '/class/user.php',
     'UserController' => $baseDir . '/controller/UserController.php',
-    'UserModel' => $baseDir . '/model/userModel.php',
+    'UserModel' => $baseDir . '/model/UserModel.php',
 );

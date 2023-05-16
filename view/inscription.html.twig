@@ -10,13 +10,23 @@
 	<div class="form">
 		<div class="container-form">
 			<h1>Créer votre compte LaRecette</h1>
-			<form action="{{ link }}" method="post">
+			<form action="{{ link }}" method="POST">
 				<input type="text" name="email" id="email" placeholder="Adresse e-mail">
 				<input type="text" name="username" id="username" placeholder="Nom d'utilisateur">
 				<input type="password" name="password" id="password" placeholder="Mot de passe">
-				<button class="connection" type="button">Se connecter</button>
+
+
 				<input class="registration" type="submit" value="Envoyer">
 			</form>
 		</div>
+	</div>
+	<div class="connection">
+		<form action="{{ connectionPage }}" method="POST">
+			<label for="email">votre addresse email</label>
+			<input type="text" name="email" id="email" placeholder="votre addresse email ici">
+			<label for="password">password</label>
+			<input type="password" name="password" id="password">
+			<input type="submit" value="se connecter">
+		</form>
 	</div>
 {% endblock %}

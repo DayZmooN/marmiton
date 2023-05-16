@@ -61,9 +61,30 @@ body header nav ul {
   align-items: center;
   justify-content: space-evenly;
 }
+@media screen and (min-width: 900px) {
+  body header nav ul {
+    flex-direction: row;
+  }
+}
 body header nav ul li {
+  text-align: center;
   list-style-type: none;
   margin: 0 15px;
+  position: relative;
+}
+body header nav ul li .sous-menu {
+  position: absolute;
+  display: none;
+  margin: 0 auto;
+  transform: translate(-50px);
+  max-width: 300px;
+  background-color: #d94160;
+}
+body header nav ul li .sous-menu ul li {
+  font-size: 1.1rem;
+}
+body header nav ul li .sous-menu ul:hover {
+  display: block;
 }
 body header nav ul li a {
   width: 100%;

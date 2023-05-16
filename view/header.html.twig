@@ -1,19 +1,35 @@
+{% set home = '/php/marmiton/' %}
+
 <header>
 	<div class="logo">
 
-		<a href=""><img src="{{ style }}img/logo.svg" alt="logo la recette"></a>
+		<a href="{{home}}"><img src="{{ style }}img/logo.svg" alt="logo la recette"></a>
 	</div>
 	<nav>
-		<form id=" searchbar" action=" " method=" get">
+		<form id="searchbar" action=" " method=" get">
 			<input type="search" name="searc" id="search">
 			<div id="btnsearch">
 				<span>Rechercher</span>
 			</div>
 		</form>
 		<ul>
-			<li><a href="#">Nos Categories</a></li>
-			<li><a href="#">Nos Selection</a></li>
-			<li><a href="#">Contact</a></li>
+			<li>
+				<a href="#">Nos Categories</a>
+				<div class='sous-menu'>
+					<ul>
+						<li>helo</li>
+						<li>helo</li>
+						<li>helo</li>
+						<li>helo</li>
+					</ul>
+				</div>
+			</li>
+			<li>
+				<a href="#">Nos Selection</a>
+			</li>
+			<li>
+				<a href="#">Contact</a>
+			</li>
 		</ul>
 	</nav>
 	<div class="burger">

@@ -69,12 +69,37 @@ body {
                 align-items: center;
                 justify-content: space-evenly;
 
+                @media screen and (min-width:900px) {
+                    flex-direction: row;
+                }
+
 
 
                 li {
-
+                    text-align: center;
                     list-style-type: none;
                     margin: 0 15px;
+                    position: relative;
+
+                    .sous-menu {
+                        position: absolute;
+                        display: none;
+                        margin: 0 auto;
+                        transform: translate(-50px);
+                        max-width: 300px;
+                        background-color: #d94160;
+
+                        ul {
+
+                            li {
+                                font-size: 1.1rem;
+                            }
+
+                            &:hover {
+                                display: block;
+                            }
+                        }
+                    }
 
                     a {
                         width: 100%;
