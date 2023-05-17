@@ -43,7 +43,7 @@ class User
         $this->password = $password;
     }
 
-    public function setCreated_at(string $created_at)
+    public function setCreated_at(?string $created_at)
     {
         $this->created_at = $created_at;
     }

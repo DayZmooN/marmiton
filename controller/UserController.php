@@ -39,44 +39,37 @@ class UserController extends Controller
         // Afficher le formulaire
         $twig = $this->getTwig();
         $link = $router->generate('baseRegistrationInscription');
-        $linkconnection = $router->generate('connectionPage');
-        echo $twig->render('inscription.html.twig', ['link' => $link, 'connectionPage' => $linkconnection]);
+        echo $twig->render('inscription.html.twig', ['link' => $link]);
     }
+
 
     public function connection()
     {
+        session_start();
 
-        // var_dump($_POST['email']);
-        if (isset($_POST['email'])) {
-            session_start();
+        $message = '';
 
+        if (isset($_POST['email'], $_POST['password'])) {
             $email = $_POST['email'];
             $password = $_POST['password'];
-
-            $model = new UserModel;
-            $userData = $model->checkLogin($email);
-
-            if ($userData) {
-                $_SESSION['id'] = $userData['id'];
-                $_SESSION['email'] = $userData['email'];
+            global $router;
+            $model = new UserModel();
+            $user = $model->checkLogin($email, $password);
+            if ($user) {
+                $_SESSION['id'] = $user->getId();
+                $_SESSION['email'] = $user->getEmail();
                 $_SESSION['connect'] = true;
-                $passwordHash = $userData['password'];
-                var_dump($userData);
-
-                if (password_verify($password, $passwordHash)) {
-                    var_dump($userData);
-
-                    // header('Location: ./');
-                }
+                header('Location: ./');
+                exit();
+            } else {
+                header('Location: ');
+                $message = "L'adresse email ou le mot de passe est incorrect.";
             }
         }
+
+        // Afficher le formulaire de connexion
+        $twig = $this->getTwig();
+        $linkconnection = $router->generate('connectionPage');
+        echo $twig->render('homePage.twig', ['link' => $linkconnection, 'message' => $message]);
     }
-
-
-
-    // } else {
-    //     global $router;
-    //     // $linkconnection = $router->generate('connectionPage');
-    //     // echo $this->getTwig()->render('connection.html.twig', ['link' => $linkconnection]);
-    // }
 }

@@ -23,28 +23,28 @@ class UserModel extends Model
         return $result;
     }
 
-    public function checkLogin($email)
-    {
-        // $result = [
-        //     'success' => false,
-        //     'message' => '',
-        //     'user' => null
-        // ];
 
+
+
+    public function checkLogin($email, $password)
+    {
         // On vérifie que l'email est valide
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $result['message'] = "Ce n'est pas une adresse email valide.";
-        } else {
-            // On recherche dans la table user
-            $req = $this->getDb()->prepare("SELECT * FROM `users` WHERE `email`= :email");
-            $req->bindValue(":email", $email, PDO::PARAM_STR);
-            $req->execute();
-            $result = $req->fetch(PDO::FETCH_ASSOC);
+            return false;
         }
-        return $result->rowCount() == 1 ? new User($result) : false;
+
+        // On recherche dans la table user
+        $stmt = $this->getDb()->prepare("SELECT * FROM `users` WHERE `email`= ?");
+        $stmt->execute([$email]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Vérifier si l'utilisateur existe et si le mot de passe est valide
+        if ($result && password_verify($password, $result['password'])) {
+            return new User($result);
+        } else {
+            return false;
+        }
     }
-
-
 
 
 

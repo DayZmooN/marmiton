@@ -1,4 +1,6 @@
 {% extends "template.html.twig" %}
+{% set home = '/php/marmiton/' %}
+
 
 {% block title %}
 	inscription
@@ -21,7 +23,7 @@
 		</div>
 	</div>
 	<div class="connection">
-		<form action="{{ connectionPage }}" method="POST">
+		<form action="{{ connectionPage }} {{ home }}" method="POST">
 			<label for="email">votre addresse email</label>
 			<input type="text" name="email" id="email" placeholder="votre addresse email ici">
 			<label for="password">password</label>
