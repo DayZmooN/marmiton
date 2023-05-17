@@ -19,7 +19,7 @@ $router->map('GET', '/recette/', '', 'baseRecette');
 $router->map('GET', '/recette/[i:id_recipe]', 'RecipeController#getOne', 'recette'); // Article unique par ID
 
 
-$router->map('GET|POST', '/inscription/', 'UserController#registrationPage',  'baseRegistration');
+$router->map('GET', '/inscription/', 'UserController#registrationPage',  'baseRegistration');
 
 //envoi de donner inscription
 
@@ -28,10 +28,14 @@ $router->map('POST', '/inscription', 'UserController#registrationPage', 'baseReg
 //connection
 $router->map('POST', '/', 'UserController#connection', 'connectionPage');
 
+//Deconnexion
+$router->map('GET', '/logout', 'UserController#logout', 'logout');
+
+
 // Recherche de la route correspondante
 $match = $router->match(); // Vérification de la route demandée par l'utilisateur
 //regarder si sa match
-// var_dump($match);
+var_dump($match);
 
 if (is_array($match)) {
     list($controller, $action) = explode('#', $match['target']);

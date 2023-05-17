@@ -13,8 +13,8 @@ class RecipeController extends Controller
         // var_dump($datas);
         $link = $router->generate('baseRecette');
         $linkRegistration = $router->generate('baseRegistration');
-        $linkconnection = $router->generate('connectionPage');
-        echo $twig->render('homePage.html.twig', ['recipes' => $datas, 'link' => $link, 'linkRegistration' => $linkRegistration, 'linkConnection' => $linkconnection]);
+        // $linkconnection = $router->generate('connectionPage');
+        echo $twig->render('homePage.html.twig', ['recipes' => $datas, 'link' => $link, 'linkRegistration' => $linkRegistration]);
     }
 
     public function getOne(int $id_recipe)

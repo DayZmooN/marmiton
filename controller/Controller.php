@@ -11,7 +11,13 @@ abstract class Controller
 
     private static function setTwig()
     {
-        self::$twig = new \Twig\Environment(self::$loader, ['cache' => false,]);
+        session_start();
+        self::$twig = new \Twig\Environment(self::$loader, ['cache' => false, 'debug' => true]);
+        //sert a debug ton twig
+        self::$twig->addExtension(new \Twig\Extension\DebugExtension());
+        self::$twig->addGlobal('session', $_SESSION);
+
+        // $twig->addGlobal('get', $_GET);
     }
 
     private static function initialize()
@@ -30,7 +36,7 @@ abstract class Controller
 
     protected static function getTwig()
     {
-        if (self::$twig === null) {
+        if (self::$twig === null || isset($_SESSION)) {
             self::initialize();
         }
         return self::$twig;

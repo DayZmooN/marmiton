@@ -23,9 +23,6 @@ class UserModel extends Model
         return $result;
     }
 
-
-
-
     public function checkLogin($email, $password)
     {
         // On vérifie que l'email est valide
@@ -34,9 +31,10 @@ class UserModel extends Model
         }
 
         // On recherche dans la table user
-        $stmt = $this->getDb()->prepare("SELECT * FROM `users` WHERE `email`= ?");
-        $stmt->execute([$email]);
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $req = $this->getDb()->prepare("SELECT `id`,`username`, `email`, `password` FROM `users` WHERE `email` = :email");
+        $req->bindParam(':email', $email);
+        $req->execute();
+        $result = $req->fetch(PDO::FETCH_ASSOC);
 
         // Vérifier si l'utilisateur existe et si le mot de passe est valide
         if ($result && password_verify($password, $result['password'])) {
@@ -45,6 +43,7 @@ class UserModel extends Model
             return false;
         }
     }
+
 
 
 

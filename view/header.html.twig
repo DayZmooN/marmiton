@@ -37,7 +37,14 @@
 	</div>
 	<div id='connect'>
 		<span class="connect_span">
-			<a href="{{linkRegistration}}">Se connecter</a>
+			{{ dump(session.connect) }}
+
+			{% if session.connect %}
+				<a href="{{home}}logout">Se déconnecter</a>
+			{% else %}
+				<a href="{{linkRegistration}}">Se connecter</a>
+			{% endif %}
+
 
 		</span>
 	</div>
