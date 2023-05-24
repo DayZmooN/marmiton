@@ -2,50 +2,77 @@
 
 <header>
 	<div class="logo">
-
-		<a href="{{home}}"><img src="{{ style }}img/logo.svg" alt="logo la recette"></a>
+		<a href="{{ home }}"><img src="{{ style }}img/logo.svg" alt="logo la recette"></a>
 	</div>
+	<form id="searchbar" action="" method="get">
+		<input type="search" name="search" id="search">
+		<div id="btnsearch">
+			<span>Rechercher</span>
+		</div>
+	</form>
 	<nav>
-		<form id="searchbar" action=" " method=" get">
-			<input type="search" name="searc" id="search">
-			<div id="btnsearch">
-				<span>Rechercher</span>
-			</div>
-		</form>
-		<ul>
-			<li>
-				<a href="#">Nos Categories</a>
-				<div class='sous-menu'>
-					<ul>
-						<li>helo</li>
-						<li>helo</li>
-						<li>helo</li>
-						<li>helo</li>
-					</ul>
-				</div>
+		<ul id="menu-nav">
+			<li class="menu-item">
+				<a href="#">Nos Catégories</a>
+				<ul class="sub-menu">
+					{% for categorie in categories %}
+						<li>
+							<a href="{{ link2 }}{{ categorie.id }}">
+								{{ categorie.title }}
+							</a>
+						</li>
+					{% endfor %}
+				</ul>
 			</li>
-			<li>
-				<a href="#">Nos Selection</a>
+			<li class="menu-item">
+				<a href="#">Nos Sélections</a>
+				<ul class="sub-menu">
+					<li>
+						<a href="#">Lien sous menu 2</a>
+					</li>
+					<li>
+						<a href="#">Lien sous menu 2</a>
+					</li>
+					<li>
+						<a href="#">Lien sous menu 2</a>
+					</li>
+					<li>
+						<a href="#">Lien sous menu 2</a>
+					</li>
+				</ul>
 			</li>
-			<li>
+
+			<li class="menu-item">
 				<a href="#">Contact</a>
+				<ul class="sub-menu">
+					<li>
+						<a href="#">Lien sous menu 4</a>
+					</li>
+					<li>
+						<a href="#">Lien sous menu 4</a>
+					</li>
+					<li>
+						<a href="#">Lien sous menu 4</a>
+					</li>
+					<li>
+						<a href="#">Lien sous menu 4</a>
+					</li>
+				</ul>
 			</li>
 		</ul>
 	</nav>
+	<div id='connect'>
+		<span
+			class="connect_span">
+			{# {{ dump(session.connect) }} #}
+			{% if session.connect %}
+				<a href="{{ link4 }}">Se déconnecter</a>
+			{% else %}
+				<a href="{{ link3 }}">Se connecter</a>
+			{% endif %}
+		</span>
+	</div>
 	<div class="burger">
 		<img src="{{ style }}img/burger.svg" alt="menu burger">
-	</div>
-	<div id='connect'>
-		<span class="connect_span">
-			{{ dump(session.connect) }}
-
-			{% if session.connect %}
-				<a href="{{home}}logout">Se déconnecter</a>
-			{% else %}
-				<a href="{{linkRegistration}}">Se connecter</a>
-			{% endif %}
-
-
-		</span>
 	</div>
 </header>

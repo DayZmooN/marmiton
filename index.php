@@ -1,8 +1,5 @@
 <?php
 
-// inclusion du fichier config.php
-// require_once './config/config.php';
-
 // Chargement des dépendances
 // Chargement de l'autoloader de Composer
 require_once './vendor/altorouter/altorouter/AltoRouter.php'; // Chargement de la classe AltoRouter
@@ -14,23 +11,27 @@ $router = new AltoRouter();
 $router->setBasePath('/php/marmiton'); // Chemin de base pour les URL
 
 // Mappage des routes avec les actions du contrôleur
-$router->map('GET', '/', 'RecipeController#homePage', 'home'); // Page d'accueil
+$router->map('GET', '/', 'RecipeController#homePage', 'home');
+
+// Page d'accueil
 $router->map('GET', '/recette/', '', 'baseRecette');
+
+
 $router->map('GET', '/recette/[i:id_recipe]', 'RecipeController#getOne', 'recette'); // Article unique par ID
-
-
-$router->map('GET', '/inscription/', 'UserController#registrationPage',  'baseRegistration');
 
 //envoi de donner inscription
 
-$router->map('POST', '/inscription', 'UserController#registrationPage', 'baseRegistrationInscription');
+$router->map('POST|GET', '/inscription/', 'UserController#registrationPage', 'baseRegistrationInscription');
 
 //connection
-$router->map('POST', '/', 'UserController#connection', 'connectionPage');
+// $router->map('POST', '/', 'UserController#connection', 'connectionPage');
+$router->map('POST', '/', 'UserController#login', 'login');
 
 //Deconnexion
 $router->map('GET', '/logout', 'UserController#logout', 'logout');
 
+//categories
+$router->map('POST', '/categories/', '', 'categories');
 
 // Recherche de la route correspondante
 $match = $router->match(); // Vérification de la route demandée par l'utilisateur

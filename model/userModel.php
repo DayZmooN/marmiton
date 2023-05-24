@@ -23,26 +23,49 @@ class UserModel extends Model
         return $result;
     }
 
-    public function checkLogin($email, $password)
-    {
-        // On vérifie que l'email est valide
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            return false;
-        }
+    // public function getOneUserByMail(string $email)
+    // {
+    //     $req = $this->getDb()->prepare("SELECT `id`, `username`, `email`, `password` FROM `users` WHERE `email` = :email");
+    //     $req->bindParam(':email', $email); // Assurez-vous que le paramètre :email est correctement défini dans la requête SQL
+    //     $req->execute();
+    //     $user = $req->fetch(PDO::FETCH_ASSOC);
 
-        // On recherche dans la table user
-        $req = $this->getDb()->prepare("SELECT `id`,`username`, `email`, `password` FROM `users` WHERE `email` = :email");
+
+    //     return $user;
+    //     // Ajouter cette ligne pour retourner le résultat
+    // }
+    public function getOneUserByMail(string $email)
+    {
+        $req = $this->getDb()->prepare("SELECT `id`, `username`, `email`, `password` FROM `users` WHERE `email` = :email");
         $req->bindParam(':email', $email);
         $req->execute();
-        $result = $req->fetch(PDO::FETCH_ASSOC);
 
-        // Vérifier si l'utilisateur existe et si le mot de passe est valide
-        if ($result && password_verify($password, $result['password'])) {
-            return new User($result);
-        } else {
-            return false;
-        }
+        $user = $req->fetch(PDO::FETCH_ASSOC);
+
+        return $user ? new User($user) : false;
     }
+    public function checkEmailExists($email)
+    {
+        $req = $this->getDb()->prepare("SELECT COUNT(*) FROM `users` WHERE `email` = :email");
+        $req->bindParam(':email', $email);
+        $req->execute();
+
+        return $req->fetchColumn() > 0;
+    }
+
+
+
+    // public function checkLogin($email, $password)
+    // {
+    //     $req = $this->getDb()->prepare("SELECT `id`, `username`, `email`, `password` FROM `users` WHERE `email` = :email");
+    //     $req->bindParam(':email', $email); // Assurez-vous que le paramètre :email est correctement défini dans la requête SQL
+    //     $req->execute();
+    //     $user = $req->fetch(PDO::FETCH_ASSOC);
+
+
+    //     return $user;
+    //     // Ajouter cette ligne pour retourner le résultat
+    // }
 
 
 

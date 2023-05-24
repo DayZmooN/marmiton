@@ -17,14 +17,16 @@
 		{# <link rel="stylesheet" href="./css/style.css"> #}
 		</head>
 		<body>
-			{% include 'header.html.twig' %}
+			{% block  headerblock %}{% endblock %}
 
 			<main>
 				{% block content %}{% endblock %}
 			</main>
 
 			{% include 'footer.html.twig' %}
-			{% block javascript %}{% endblock %}
+			{% block javascript %}
+				<script src="{{style}}js/sign.js"></script>
+			{% endblock %}
 		</body>
 
 	</html>

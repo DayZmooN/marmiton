@@ -1,4 +1,7 @@
 {% extends "template.html.twig" %}
+{% block headerblock %}
+	{% include 'header.html.twig' with {'categories' : cats } %}
+{% endblock %}
 
 {% block title %}
 	Bienvenue sur la page d'acceuil

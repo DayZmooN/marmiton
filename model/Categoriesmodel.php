@@ -5,13 +5,14 @@ class CategoriesModel  extends Model
 
     public function getAllCategories()
     {
-        $_POST = [];
+        $categories = [];
         $req = $this->getDb()->query('SELECT `id`,`title` FROM `categories` ORDER BY `id`;');
-        while ($post = $req->fetch(PDO::FETCH_ASSOC)) {
-            $posts[] = new Categories($post);
+        while ($categorie = $req->fetch(PDO::FETCH_ASSOC)) {
+            $categories[] = new Categories($categorie);
         }
-        $req->closeCursor();
-        return $posts;
+        // $req->closeCursor();
+        // var_dump($categories);
+        return $categories;
     }
 
     public function getOneCategories()
