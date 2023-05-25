@@ -44,6 +44,25 @@ class UserModel extends Model
 
 
 
+    public function getUserRecipes(int $userId)
+    {
+        $recipes = [];
+
+        $req = $this->getDb()->prepare('SELECT `recipes`.`id_recipes`, `recipes`.`userid`, `recipes`.`title`, `recipes`.`duration`, `recipes`.`thumbnail`, `recipes`.`content`, `recipes`.`created_at`, `users`.`id`, `users`.`username`, `users`.`email`,  `users`.`password`
+            FROM `recipes`
+            INNER JOIN `users`
+            ON `recipes`.`userid` = `users`.`id`
+            WHERE `recipes`.`userid` = :id');
+        $req->bindParam(':id', $userId, PDO::PARAM_INT);
+        $req->execute();
+
+        while ($recipeData = $req->fetch(PDO::FETCH_ASSOC)) {
+            $recipes[] = new Recipes($recipeData);
+        }
+
+        $req->closeCursor();
+        return $recipes;
+    }
 
 
 

@@ -1,7 +1,9 @@
 {% extends "template.html.twig" %}
+{# {% set home = '/php/marmiton/' %} #}
+
 
 {% block title %}
-	{{ category.cname }}
+	{{ category.title }}
 {% endblock %}
 
 {% block headerblock %}
@@ -22,7 +24,7 @@
 			{% for recipe in recipes %}
 				<div id="recipe-card">
 					<li>
-						<a href="{{ link7 }}{{ recipe.id }}">{{ recipe.title }}</a>
+						<a href="{{ link }}{{ recipe.id_recipes }}">{{ recipe.title }}</a>
 					</li>
 					<li>
 						<p>{{ recipe.duration }}</p>

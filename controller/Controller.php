@@ -22,9 +22,17 @@ abstract class Controller
             self::$twig->addGlobal('session', $_SESSION);
             self::$twig->addGlobal('get', $_GET);
 
+            // Add the path function to Twig environment
             self::$twig->addFunction(new \Twig\TwigFunction('path', function ($routeName) {
                 global $router;
                 return $router->generate($routeName);
+            }));
+
+            // Add the asset function to Twig environment
+            self::$twig->addFunction(new \Twig\TwigFunction('asset', function ($assetPath) {
+                // Modify this logic according to your asset setup
+                $basePath = '/projets/marmiton/asset'; // Update with your base asset path
+                return $basePath . $assetPath;
             }));
         }
         return self::$twig;
@@ -35,7 +43,7 @@ abstract class Controller
         global $router;
 
         $link = $router->generate('baseRecette');
-        $link7 = $router->generate('recette');
+        // $link7 = $router->generate('recette');
         // CATEGORIES
         $link2 = $router->generate('categories');
         $categories = new CategorieModel();
@@ -54,6 +62,9 @@ abstract class Controller
         //categorie header
         $link6 = $router->generate('baseRecetteCategorie');
 
+        //account 
+        // $link7 = $router->generate('')
+
         // Création d'un nouveau tableau avec les données nécessaires
         $new = [
             'link' => $link,
@@ -63,7 +74,7 @@ abstract class Controller
             'link4' => $link4,
             'link5' => $link5,
             'link6' => $link6,
-            'link7' => $link7
+            // 'link7' => $link7
         ] + $datas;
 
         // Rendu du template en utilisant Twig

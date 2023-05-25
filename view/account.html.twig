@@ -1,0 +1,36 @@
+{% extends "template.html.twig" %}
+
+{% block headerblock %}
+	{% include 'header.html.twig' with {'categories': cats } %}
+{% endblock %}
+
+{% block title %}
+	{{ session.username }}'s Account
+{% endblock %}
+
+{% block content %}
+	Bienvenue
+	{{ session.username }}
+
+	<a href="{{ path('addRecipe') }}">Add a recipe</a>
+	<p>{{session.username}}</p>
+
+	<ul>
+		{% for recipe in userRecipes %}
+			<div id="recipe-card">
+				<li>
+					<a href="{{ link }}{{ recipe.id_recipes }}">
+						<h2>{{ recipe.title }}</h2>
+					</a>
+				</li>
+				<li>
+					<p>{{ recipe.content }}</p>
+				</li>
+				<div>
+					<button>Edit</button>
+					<button>Delete</button>
+				</div>
+			</div>
+		{% endfor %}
+	</ul>
+{% endblock %}

@@ -24,9 +24,13 @@ class RecipeController extends Controller
 
     public function addRecipe()
     {
-        // session_start();
         global $router;
-        $recipe = new UserModel;
+
+        // Vérifier si l'utilisateur est connecté
+        if (!isset($_SESSION['id'])) {
+            header('Location: ' . $router->generate('baseRegistrationInscription'));
+            exit;
+        }
 
         if (!$_POST) {
             echo self::getRender('addrecipe.html.twig', []);
@@ -39,8 +43,6 @@ class RecipeController extends Controller
                 $thumbnail = $_POST['thumbnail'];
                 $author = $_SESSION['id'];
 
-
-
                 // Vérifier si le champ 'content' n'est pas vide
                 if (!empty($content)) {
                     $recipe = new Recipes([
@@ -51,11 +53,11 @@ class RecipeController extends Controller
                         'thumbnail' => $thumbnail,
                         'userid' => $author,
                     ]);
-                    var_dump($recipe);
 
                     $model = new RecipeModel();
                     $model->addRecipe($recipe);
                     header('Location: ' . $router->generate('home'));
+                    exit;
                 } else {
                     echo 'Le champ contenu est vide.';
                 }

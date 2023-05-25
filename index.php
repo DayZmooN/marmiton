@@ -32,13 +32,16 @@ $router->map('GET', '/logout', 'UserController#logout', 'logout');
 $router->map('GET|POST', '/addRecipe', 'RecipeController#addRecipe', 'addRecipe');
 
 //categories
-$router->map('GET', '/categories/', '', 'categories');
+$router->map('GET', '/categories', '', 'categories');
 //recette selon les categorie
 $router->map('GET', '/category/[i:id]', 'CategorieController#getOne', 'baseRecetteCategorie');
 
 
 //searchbar
 $router->map('GET', '/search', 'SearchController#searchResult', 'search');
+
+//account
+$router->map('GET', '/account', 'UserController#account', 'account');
 
 
 

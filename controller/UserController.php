@@ -68,9 +68,6 @@ class UserController extends Controller
     }
 
 
-
-
-
     public function login()
     {
         // session_start();
@@ -107,10 +104,6 @@ class UserController extends Controller
         }
     }
 
-
-
-
-
     public function logout()
     {
         // session_start();
@@ -119,6 +112,25 @@ class UserController extends Controller
             session_destroy(); // Détruire la session
 
             header('Location: ' . $router->generate('home'));
+        }
+    }
+
+
+    public function account()
+    {
+        if ($_SESSION['connect']) {
+            $userId = $_SESSION['id'];
+
+            $model = new UserModel();
+            $userRecipes = $model->getUserRecipes($userId);
+            var_dump($userId);
+
+            echo self::getRender('account.html.twig', ['userRecipes' => $userRecipes]);
+        } else {
+            // Redirect to login page if not logged in
+            global $router;
+            header('Location: ' . $router->generate('login'));
+            exit();
         }
     }
 }
