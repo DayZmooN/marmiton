@@ -23,17 +23,6 @@ class UserModel extends Model
         return $result;
     }
 
-    // public function getOneUserByMail(string $email)
-    // {
-    //     $req = $this->getDb()->prepare("SELECT `id`, `username`, `email`, `password` FROM `users` WHERE `email` = :email");
-    //     $req->bindParam(':email', $email); // Assurez-vous que le paramètre :email est correctement défini dans la requête SQL
-    //     $req->execute();
-    //     $user = $req->fetch(PDO::FETCH_ASSOC);
-
-
-    //     return $user;
-    //     // Ajouter cette ligne pour retourner le résultat
-    // }
     public function getOneUserByMail(string $email)
     {
         $req = $this->getDb()->prepare("SELECT `id`, `username`, `email`, `password` FROM `users` WHERE `email` = :email");
@@ -55,17 +44,7 @@ class UserModel extends Model
 
 
 
-    // public function checkLogin($email, $password)
-    // {
-    //     $req = $this->getDb()->prepare("SELECT `id`, `username`, `email`, `password` FROM `users` WHERE `email` = :email");
-    //     $req->bindParam(':email', $email); // Assurez-vous que le paramètre :email est correctement défini dans la requête SQL
-    //     $req->execute();
-    //     $user = $req->fetch(PDO::FETCH_ASSOC);
 
-
-    //     return $user;
-    //     // Ajouter cette ligne pour retourner le résultat
-    // }
 
 
 

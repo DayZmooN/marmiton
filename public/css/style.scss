@@ -1216,4 +1216,15 @@ body {
             }
         }
     }
+
+    // formulaire d'ajout
+
+}
+
+.step {
+    display: none;
+
+    &.active {
+        display: block;
+    }
 }

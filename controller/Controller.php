@@ -19,10 +19,13 @@ abstract class Controller
         if (self::$twig === null) {
             $loader = self::getLoader();
             self::$twig = new \Twig\Environment($loader);
-        }
-        if (isset($_SESSION['connect'])) {
             self::$twig->addGlobal('session', $_SESSION);
             self::$twig->addGlobal('get', $_GET);
+
+            self::$twig->addFunction(new \Twig\TwigFunction('path', function ($routeName) {
+                global $router;
+                return $router->generate($routeName);
+            }));
         }
         return self::$twig;
     }
@@ -30,12 +33,12 @@ abstract class Controller
     protected static function setRender(string $template, $datas)
     {
         global $router;
-        @session_start();
-        // LINKS
+
         $link = $router->generate('baseRecette');
+        $link7 = $router->generate('recette');
         // CATEGORIES
         $link2 = $router->generate('categories');
-        $categories = new CategoriesModel();
+        $categories = new CategorieModel();
         $cats = $categories->getAllCategories();
         // Inscription
         $link3 = $router->generate('baseRegistrationInscription');
@@ -45,7 +48,11 @@ abstract class Controller
         // Déconnexion
         $link4 = $router->generate('logout');
 
+        //create recipe
+        $link5 = $router->generate('addRecipe');
 
+        //categorie header
+        $link6 = $router->generate('baseRecetteCategorie');
 
         // Création d'un nouveau tableau avec les données nécessaires
         $new = [
@@ -53,7 +60,10 @@ abstract class Controller
             'cats' => $cats,
             'link2' => $link2,
             'link3' => $link3,
-            'link4' => $link4
+            'link4' => $link4,
+            'link5' => $link5,
+            'link6' => $link6,
+            'link7' => $link7
         ] + $datas;
 
         // Rendu du template en utilisant Twig

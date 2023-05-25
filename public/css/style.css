@@ -975,4 +975,11 @@ body .container-form button {
   .contain-footer .col .footer-ul li {
     font-size: 13px;
   }
+}
+
+.step {
+  display: none;
+}
+.step.active {
+  display: block;
 }/*# sourceMappingURL=style.css.map */

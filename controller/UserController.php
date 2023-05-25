@@ -3,7 +3,7 @@ class UserController extends Controller
 {
     public function registrationPage()
     {
-        session_start();
+        // session_start();
         global $router;
         $model = new UserModel();
 
@@ -69,9 +69,11 @@ class UserController extends Controller
 
 
 
+
+
     public function login()
     {
-        session_start();
+        // session_start();
         global $router;
 
         if (!$_POST) {
@@ -95,7 +97,7 @@ class UserController extends Controller
             $_SESSION['id'] = $user->getId();
             $_SESSION['email'] = $user->getUsername();
             $_SESSION['connect'] = true;
-            var_dump($user);
+            // var_dump($user);
             $linkconnection = $router->generate('login');
             echo self::getRender('homePage.html.twig', ['connectionPage' => $linkconnection]);
         } else {
@@ -111,7 +113,7 @@ class UserController extends Controller
 
     public function logout()
     {
-        session_start();
+        // session_start();
         if ($_SESSION['connect'] = true) {
             global  $router;
             session_destroy(); // Détruire la session

@@ -17,16 +17,17 @@
 		{# <link rel="stylesheet" href="./css/style.css"> #}
 		</head>
 		<body>
-			{% block  headerblock %}{% endblock %}
+			{% block headerblock %}
+				{% include 'header.html.twig' with {'categories' : cats } %}
+			{% endblock %}
 
 			<main>
 				{% block content %}{% endblock %}
 			</main>
 
 			{% include 'footer.html.twig' %}
-			{% block javascript %}
-				<script src="{{style}}js/sign.js"></script>
-			{% endblock %}
+			<script src="{{style}}js/sign.js"></script>
+			<script src="{{style}}js/newrecipe.js"></script>
 		</body>
 
 	</html>

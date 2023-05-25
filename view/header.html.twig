@@ -4,11 +4,9 @@
 	<div class="logo">
 		<a href="{{ home }}"><img src="{{ style }}img/logo.svg" alt="logo la recette"></a>
 	</div>
-	<form id="searchbar" action="" method="get">
-		<input type="search" name="search" id="search">
-		<div id="btnsearch">
-			<span>Rechercher</span>
-		</div>
+	<form action="{{ path('search') }}" method="GET">
+		<input type="search" name="search" placeholder="Search Recipes . . .">
+		<button type="submit">X</button>
 	</form>
 	<nav>
 		<ul id="menu-nav">
@@ -17,7 +15,7 @@
 				<ul class="sub-menu">
 					{% for categorie in categories %}
 						<li>
-							<a href="{{ link2 }}{{ categorie.id }}">
+							<a href="{{ link6 }}{{ categorie.id }}">
 								{{ categorie.title }}
 							</a>
 						</li>
@@ -59,13 +57,20 @@
 					</li>
 				</ul>
 			</li>
+			<li class="menu-item">
+				<a href="{{path('addRecipe')}}">create recipe</a>
+			</li>
 		</ul>
+
 	</nav>
 	<div id='connect'>
-		<span
-			class="connect_span">
-			{# {{ dump(session.connect) }} #}
-			{% if session.connect %}
+		{% if session.connect %}
+			<li>
+				{# <a href="./dashboard.html.twig">dashboard</a> #}
+			</li>
+			<span
+				class="connect_span">
+				{# {{ dump(session.connect) }} #}
 				<a href="{{ link4 }}">Se déconnecter</a>
 			{% else %}
 				<a href="{{ link3 }}">Se connecter</a>

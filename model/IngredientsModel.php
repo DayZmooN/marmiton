@@ -24,15 +24,15 @@ class IngredientsModel extends Model
         return $categorie;
     }
 
-    public function getAddIngredient()
-    {
-        if (isset($_POST['submit'])) {
-            $name = $_POST['name'];
-            $req = $this->getDb()->prepare("INSERT INTO `ingredients` (`name`) VALUES (:name)");
-            $req->bindParam('name', $name, PDO::PARAM_STR);
-            $req->execute();
-        }
-    }
+    // public function getAddIngredient()
+    // {
+    //     if (isset($_POST['submit'])) {
+    //         $name = $_POST['name'];
+    //         $req = $this->getDb()->prepare("INSERT INTO `ingredients` (`name`) VALUES (:name)");
+    //         $req->bindParam('name', $name, PDO::PARAM_STR);
+    //         $req->execute();
+    //     }
+    // }
 
     public function getDeleteIngredient()
     {
@@ -54,5 +54,13 @@ class IngredientsModel extends Model
             $req->bindParam('name', $name, PDO::PARAM_STR);
             $req->execute();
         }
+    }
+
+    public function addIngredientToRecipe($recipeId, $ingredientId)
+    {
+        $req = $this->getDb()->prepare("INSERT INTO `recipe_ingredients` (`recipe_id`, `ingredient_id`) VALUES (:recipe_id, :ingredient_id)");
+        $req->bindParam('recipe_id', $recipeId, PDO::PARAM_INT);
+        $req->bindParam('ingredient_id', $ingredientId, PDO::PARAM_INT);
+        $req->execute();
     }
 }

@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 // Chargement des dépendances
 // Chargement de l'autoloader de Composer
 require_once './vendor/altorouter/altorouter/AltoRouter.php'; // Chargement de la classe AltoRouter
@@ -16,11 +16,9 @@ $router->map('GET', '/', 'RecipeController#homePage', 'home');
 // Page d'accueil
 $router->map('GET', '/recette/', '', 'baseRecette');
 
-
 $router->map('GET', '/recette/[i:id_recipe]', 'RecipeController#getOne', 'recette'); // Article unique par ID
 
 //envoi de donner inscription
-
 $router->map('POST|GET', '/inscription/', 'UserController#registrationPage', 'baseRegistrationInscription');
 
 //connection
@@ -30,8 +28,19 @@ $router->map('POST', '/', 'UserController#login', 'login');
 //Deconnexion
 $router->map('GET', '/logout', 'UserController#logout', 'logout');
 
+//addRecipe
+$router->map('GET|POST', '/addRecipe', 'RecipeController#addRecipe', 'addRecipe');
+
 //categories
-$router->map('POST', '/categories/', '', 'categories');
+$router->map('GET', '/categories/', '', 'categories');
+//recette selon les categorie
+$router->map('GET', '/category/[i:id]', 'CategorieController#getOne', 'baseRecetteCategorie');
+
+
+//searchbar
+$router->map('GET', '/search', 'SearchController#searchResult', 'search');
+
+
 
 // Recherche de la route correspondante
 $match = $router->match(); // Vérification de la route demandée par l'utilisateur

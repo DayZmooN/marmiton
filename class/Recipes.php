@@ -5,7 +5,7 @@ class Recipes
     private $title;
     private $slug;
     private $duration;
-    private $user_id;
+    private $userid;
     private $thumbnail;
     private $content;
 
@@ -51,9 +51,9 @@ class Recipes
         $this->content = $content;
     }
 
-    public function setUser_id(int $user_id)
+    public function setUserid(int $userid)
     {
-        $this->user_id = $user_id;
+        $this->userid = $userid;
     }
 
 
@@ -75,9 +75,9 @@ class Recipes
     {
         return $this->duration;
     }
-    public function getUser_id()
+    public function getUserid()
     {
-        return $this->user_id;
+        return $this->userid;
     }
     public function getThumbnail()
     {
@@ -86,5 +86,37 @@ class Recipes
     public function getContent()
     {
         return $this->content;
+    }
+}
+
+class RecipeCreationResult
+{
+    private $success;
+    private $message;
+
+    public function __construct(bool $success, string $message)
+    {
+        $this->success = $success;
+        $this->message = $message;
+    }
+
+    public function isSuccess(): bool
+    {
+        return $this->success;
+    }
+
+    public function getMessage(): string
+    {
+        return $this->message;
+    }
+
+    public function setSuccess(bool $success): void
+    {
+        $this->success = $success;
+    }
+
+    public function setMessage(string $message): void
+    {
+        $this->message = $message;
     }
 }

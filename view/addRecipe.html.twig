@@ -1,0 +1,33 @@
+{% extends "template.html.twig" %}
+
+{% block title %}
+	Add New Recipe
+{% endblock %}
+
+{% block style %}{% endblock %}
+
+{% block content %}
+	<form method="POST" action="{{ path('addRecipe') }}">
+		<label for="title">Title</label>
+		<br>
+		<input type="text" id="title" name="title" placeholder="Enter the name of your recipe here">
+		<br>
+
+		<label for="slug">Slug:</label>
+		<input type="text" name="slug" id="slug">
+
+		<label for="duration">Durée:</label>
+		<input type="text" name="duration" id="duration">
+
+		<label for="thumbnail">URL de l'image miniature:</label>
+		<input type="text" name="thumbnail" id="thumbnail">
+
+		<label for="content">Contenu:</label>
+		<textarea name="content" id="content"></textarea>
+
+		<h3>Ingrédients sélectionnés:</h3>
+		<div id="selected-ingredients"></div>
+
+		<button type="submit" name="submit">Ajouter la recette</button>
+	</form>
+{% endblock %}

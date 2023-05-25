@@ -1,0 +1,34 @@
+{% extends "template.html.twig" %}
+
+{% block title %}
+	{{ category.cname }}
+{% endblock %}
+
+{% block headerblock %}
+	{% include 'header.html.twig' with {'categories' : cats } %}
+{% endblock %}
+
+
+{% block content %}
+	<h2>{{ category.gettitle() }}</h2>
+	<p>Category ID:
+		{{ category.getId() }}</p>
+
+	{% if recipes is empty %}
+		<p>Sorry, there are no recipes in this category.</p>
+	{% else %}
+		<h3>Recipes:</h3>
+		<ul>
+			{% for recipe in recipes %}
+				<div id="recipe-card">
+					<li>
+						<a href="{{ link7 }}{{ recipe.id }}">{{ recipe.title }}</a>
+					</li>
+					<li>
+						<p>{{ recipe.duration }}</p>
+					</li>
+				</div>
+			{% endfor %}
+		</ul>
+	{% endif %}
+{% endblock %}
