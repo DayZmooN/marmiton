@@ -118,12 +118,12 @@ class UserController extends Controller
 
     public function account()
     {
+
         if ($_SESSION['connect']) {
             $userId = $_SESSION['id'];
 
             $model = new UserModel();
             $userRecipes = $model->getUserRecipes($userId);
-            var_dump($userId);
 
             echo self::getRender('account.html.twig', ['userRecipes' => $userRecipes]);
         } else {

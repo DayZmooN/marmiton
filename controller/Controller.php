@@ -19,26 +19,30 @@ abstract class Controller
         if (self::$twig === null) {
             $loader = self::getLoader();
             self::$twig = new \Twig\Environment($loader);
+
+            // Ajouter les variables de session au contexte global de Twig
             self::$twig->addGlobal('session', $_SESSION);
+
+            // Ajouter les variables GET au contexte global de Twig
             self::$twig->addGlobal('get', $_GET);
 
-            // Add the path function to Twig environment
+            // Ajouter la fonction "path" à l'environnement Twig
             self::$twig->addFunction(new \Twig\TwigFunction('path', function ($routeName) {
                 global $router;
                 return $router->generate($routeName);
             }));
 
-            // Add the asset function to Twig environment
+            // Ajouter la fonction "asset" à l'environnement Twig
             self::$twig->addFunction(new \Twig\TwigFunction('asset', function ($assetPath) {
-                // Modify this logic according to your asset setup
-                $basePath = '/projets/marmiton/asset'; // Update with your base asset path
+                // Modifier cette logique en fonction de la configuration de vos assets
+                $basePath = '/projets/marmiton/asset'; // Mettez à jour avec votre chemin de base des assets
                 return $basePath . $assetPath;
             }));
         }
         return self::$twig;
     }
 
-    protected static function setRender(string $template, $datas)
+    protected static function setRender(string $template, $data)
     {
         global $router;
 
@@ -51,40 +55,33 @@ abstract class Controller
         // Inscription
         $link3 = $router->generate('baseRegistrationInscription');
 
-
-
         // Déconnexion
         $link4 = $router->generate('logout');
 
-        //create recipe
-        $link5 = $router->generate('addRecipe');
-
-        //categorie header
-        $link6 = $router->generate('baseRecetteCategorie');
-
-        //account 
-        // $link7 = $router->generate('')
+        // Création d'une nouvelle variable de session pour Twig
+        $session = $_SESSION;
 
         // Création d'un nouveau tableau avec les données nécessaires
-        $new = [
-            'link' => $link,
-            'cats' => $cats,
-            'link2' => $link2,
-            'link3' => $link3,
-            'link4' => $link4,
-            'link5' => $link5,
-            'link6' => $link6,
-            // 'link7' => $link7
-        ] + $datas;
+        $data = array_merge(
+            [
+                'link' => $link,
+                'cats' => $cats,
+                'link2' => $link2,
+                'link3' => $link3,
+                'link4' => $link4,
+                'session' => $session,
+            ],
+            $data
+        );
 
         // Rendu du template en utilisant Twig
-        echo self::getTwig()->render($template, $new);
+        echo self::getTwig()->render($template, $data);
     }
 
-    protected static function getRender($template, $datas)
+    protected static function getRender($template, $data)
     {
         if (self::$render === null) {
-            self::setRender($template, $datas);
+            self::setRender($template, $data);
         }
         return self::$render;
     }

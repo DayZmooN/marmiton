@@ -1,19 +1,19 @@
 {% extends "template.html.twig" %}
 
-{% block headerblock %}
-	{% include 'header.html.twig' with {'categories': cats } %}
-{% endblock %}
 
 {% block title %}
-	{{ session.username }}'s Account
+	{{ app.session.get('username') }}'s Account
 {% endblock %}
 
+{# {% block headerblock %}
+	{% include 'header.html.twig' with {'categories': cats } %}
+{% endblock %} #}
 {% block content %}
 	Bienvenue
-	{{ session.username }}
+	{{ app.session.get('username') }}
 
 	<a href="{{ path('addRecipe') }}">Add a recipe</a>
-	<p>{{session.username}}</p>
+	<p>{{ session.username }}</p>
 
 	<ul>
 		{% for recipe in userRecipes %}
