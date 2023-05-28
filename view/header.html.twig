@@ -15,7 +15,7 @@
 				<ul class="sub-menu">
 					{% for categorie in categories %}
 						<li>
-							<a href="{{ link6 }}{{ categorie.id }}">
+							<a href="{{ path('baseRecetteCategorie') }}{{ categorie.id }}">
 								{{ categorie.title }}
 							</a>
 						</li>

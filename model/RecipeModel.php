@@ -72,39 +72,49 @@ class RecipeModel extends Model
         return $ingredient ? new Ingredients($ingredient) : false;
     }
 
-    public function getDelete()
+    public function getDeleteRecipe($recipeId)
     {
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
-            $req = $this->getDb()->prepare("DELETE FROM `recipes` WHERE `id_recipes`= :id");
-            $req->bindParam('id', $id, PDO::PARAM_INT);
+        $result = [
+            'success' => false,
+            'message' => ''
+        ];
 
-            $req->execute();
+        // Supprimer la recette de la base de données
+        $req = $this->getDb()->prepare("DELETE FROM `recipes` WHERE `id_recipes` = :id");
+        $req->bindParam(':id', $recipeId, PDO::PARAM_INT);
+        $req->execute();
+
+        // Supprimer les ingrédients associés dans la table intermédiaire
+        $reqIngredients = $this->getDb()->prepare("DELETE FROM `ingredient_recipes` WHERE `recipe_id` = :id");
+        $reqIngredients->bindParam(':id', $recipeId, PDO::PARAM_INT);
+        $reqIngredients->execute();
+
+        // Vérifier si la suppression a réussi
+        if ($req->rowCount() > 0 && $reqIngredients->rowCount() > 0) {
+            $result['success'] = true;
+        } else {
+            $result['message'] = "Erreur lors de la suppression de la recette.";
         }
+
+        return $result;
     }
 
-    public function getEditRecipe()
+
+
+
+    public function editRecipe(Recipes $recipe)
     {
-        $id_recipes = ($_POST['id_recipes']);
-        $title = ($_POST['title']);
-        $slug = ($_POST['slug']);
-        $duration = ($_POST['duration']);
-        $userid = ($_POST['userid']);
-        $thumbnail = ($_POST['thumbnail']);
-        $content = ($_POST['content']);
+        $id = $recipe->getId_recipes();
+        $title = $recipe->getTitle();
+        $duration = $recipe->getDuration();
+        $content = $recipe->getContent();
 
-        $req = $this->getDb()->prepare("UPDATE `recipes` SET `id_recipes`= :id_recipes, `title`= :title, `slug`= :slug, `duration`= :duration, `userid`= :userid, `thumbnail`= :thumbnail, `content`= :content WHERE `recipes`= :id");
+        $req = $this->getDb()->prepare('UPDATE `recipes` SET `title` = :title, `duration` = :duration, `content` = :content WHERE `id_recipes` = :id_recipes');
 
-
-
-        $req->bindParam('id_recipes', $id_recipes, PDO::PARAM_INT);
+        $req->bindParam('id_recipes', $id, PDO::PARAM_INT);
         $req->bindParam('title', $title, PDO::PARAM_STR);
-        $req->bindParam('slug', $slug, PDO::PARAM_STR);
-        $req->bindParam('duration', $duration, PDO::PARAM_INT);
-        $req->bindParam('userid', $userid, PDO::PARAM_INT);
-        $req->bindParam('thumbnail', $thumbnail, PDO::PARAM_STR);
+        $req->bindParam('duration', $duration, PDO::PARAM_STR);
         $req->bindParam('content', $content, PDO::PARAM_STR);
-
 
         $req->execute();
     }

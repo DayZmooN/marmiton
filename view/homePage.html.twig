@@ -1,10 +1,13 @@
 {% extends "template.html.twig" %}
+{% set home = '/php/marmiton/' %}
 
+{% block head %}
 
-{% block title %}
-	Bienvenue sur la page d'acceuil
+	{% block title %}
+		Bienvenue sur la page d'acceuil
+	{% endblock %}
+
 {% endblock %}
-
 
 {% block content %}
 	{# section hero #}
@@ -13,18 +16,13 @@
 			<h1>RECETTE ET CONSEILS DE CHEF POUR LES RÉUSSIR</h1>
 		</div>
 	</section>
-
 	{# section recette du jour  #}
-
 	<section class="recipe_day">
-		<h1>Recette du jour
-		</h1>
+		<h1>Recette du jour</h1>
 		<div class="slider_container_cards">
-
 			<div class="card_container">
 				{% for recipe in recipes %}
 					<div class="card">
-
 						<a href="{{link}}{{recipe.id_recipes}}">
 							<div class="img-box">
 								<img src="./public/img/{{ recipe.thumbnail }}" alt="{{ recipe.title }}">

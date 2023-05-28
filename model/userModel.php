@@ -20,8 +20,22 @@ class UserModel extends Model
         $req->bindValue(":email", $user->getEmail(), PDO::PARAM_STR);
         $req->execute();
 
+        // Récupérer l'ID généré après l'inscription
+        $userId = $this->getDb()->lastInsertId();
+
+        if ($userId) {
+            $result['success'] = true;
+            $result['id'] = $userId;
+            $result['username'] = $user->getUsername();
+            $result['email'] = $user->getEmail();
+        } else {
+            // Gérer l'erreur de récupération de l'ID
+            // ...
+        }
+
         return $result;
     }
+
 
     public function getOneUserByMail(string $email)
     {
@@ -72,4 +86,26 @@ class UserModel extends Model
     // public function getEditUser()
     // {
     // }
+
+    public function getDeleteUser($userId)
+    {
+        $result = [
+            'success' => false,
+            'message' => ''
+        ];
+
+        // Supprimer l'utilisateur de la base de données
+        $req = $this->getDb()->prepare("DELETE FROM `users` WHERE `id` = :userId");
+        $req->bindValue(":userId", $userId, PDO::PARAM_INT);
+        $req->execute();
+
+        // Vérifier si la suppression a réussi
+        if ($req->rowCount() > 0) {
+            $result['success'] = true;
+        } else {
+            $result['message'] = "Erreur lors de la suppression de l'utilisateur.";
+        }
+
+        return $result;
+    }
 }

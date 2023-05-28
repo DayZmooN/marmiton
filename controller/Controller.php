@@ -58,8 +58,22 @@ abstract class Controller
         // Déconnexion
         $link4 = $router->generate('logout');
 
+
         // Création d'une nouvelle variable de session pour Twig
         $session = $_SESSION;
+
+
+        //delete 
+        $link8 = $router->generate('deleteRecipe');
+
+        //EDIT
+        $link9 = $router->generate('editRecipe');
+
+        //account
+        $link10 = $router->generate('account');
+
+        //error
+        $error = $router->generate('error');
 
         // Création d'un nouveau tableau avec les données nécessaires
         $data = array_merge(
@@ -70,6 +84,11 @@ abstract class Controller
                 'link3' => $link3,
                 'link4' => $link4,
                 'session' => $session,
+                'link8' => $link8,
+                'link9' => $link9,
+                'link10' => $link10,
+                'error' => $error,
+
             ],
             $data
         );

@@ -543,6 +543,7 @@ body .section-recipe-slide-today .container-cards .card .image {
   margin: auto;
   height: 250px;
   transition: 0.5s;
+  z-index: 20;
 }
 @media screen and (min-width: 900px) {
   body .section-recipe-slide-today .container-cards .card .image {
@@ -902,11 +903,13 @@ body .container-form button {
 /* STYLES  TO FOOTER  */
 .contain-footer {
   width: 100%;
+  position: fixed;
   margin: 0 auto;
   bottom: 0%;
   background-color: #070617;
   display: flex;
   justify-content: center;
+  z-index: 999;
 }
 .contain-footer .col {
   width: 190px;

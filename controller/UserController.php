@@ -43,10 +43,10 @@ class UserController extends Controller
                             // Sauvegarder l'utilisateur dans la base de données
                             $result = $model->saveUser($user);
 
-                            if ($result) {
+                            if ($result['success']) {
                                 // Rediriger l'utilisateur vers la page d'accueil
-                                $_SESSION['id'] = $user->getId();
-                                $_SESSION['email'] = $user->getUsername();
+                                $_SESSION['id'] = $result['id'];
+                                $_SESSION['email'] = $result['email'];
                                 $_SESSION['connect'] = true;
                                 header('Location: ' . $router->generate('home'));
                                 exit();
@@ -66,6 +66,7 @@ class UserController extends Controller
         $linkregistation = $router->generate('baseRegistrationInscription');
         echo self::getRender('inscription.html.twig', ['linkregistation' => $linkregistation, 'message' => $message]);
     }
+
 
 
     public function login()

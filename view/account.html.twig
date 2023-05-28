@@ -10,10 +10,10 @@
 {% endblock %} #}
 {% block content %}
 	Bienvenue
-	{{ app.session.get('username') }}
+	{{ session.username }}
 
 	<a href="{{ path('addRecipe') }}">Add a recipe</a>
-	<p>{{ session.username }}</p>
+	<p>{{ session.email }}</p>
 
 	<ul>
 		{% for recipe in userRecipes %}
@@ -27,10 +27,17 @@
 					<p>{{ recipe.content }}</p>
 				</li>
 				<div>
-					<button>Edit</button>
-					<button>Delete</button>
-				</div>
+					<button>
+
+						<a href="{{ path('editRecipe') }}{{ recipe.id_recipes }}">Edit</a>
+					</form>
+				</button>
+				<button>
+					<form action="" method="post">
+						<a href="{{ link8 }}{{ recipe.id_recipes }}">Delete</a>
+					</form>
+				</button>
 			</div>
-		{% endfor %}
-	</ul>
-{% endblock %}
+		</div>
+	{% endfor %}
+</ul>{% endblock %}

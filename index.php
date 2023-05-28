@@ -43,6 +43,24 @@ $router->map('GET', '/search', 'SearchController#searchResult', 'search');
 //account
 $router->map('GET', '/account', 'UserController#account', 'account');
 
+//delete recipe 
+$router->map('GET|POST', '/recipe/delete/[i:recipeId]', 'RecipeController#deleteRecipe', 'deleteRecipe');
+
+//EDIT
+
+// $router->map('GET|POST', '/edit/', 'RecipeController#editRecipe', 'editRecipe');
+
+// $router->map('POST', '/recipe/{id}', 'RecipeController#editRecipe', 'recipe');
+
+// $router->map('GET|POST', '/edit/', 'RecipeController#editRecipe', 'recipe');
+
+$router->map('GET|POST', '/edit/[i:id_recipe]', 'RecipeController#editRecipe', 'editRecipe');
+
+//error
+$router->map('GET', '/error', 'ErrorController#error', 'error');
+
+
+
 
 
 // Recherche de la route correspondante
