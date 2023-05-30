@@ -1,49 +1,62 @@
 {% extends "template.html.twig" %}
 
-{% block headerblock %}
-	{% include 'header.html.twig' with {'categories' : cats } %}
-{% endblock %}
 
-{% block title %}Edit a recipe
+{% block title %}
+	{{ app.session.get('username') }}'s Account
 {% endblock %}
 
 {% block content %}
 
 	<div id="addRecipeForm">
 		<fieldset>
-
 			{% if message %}
-				<p>
-					{{ message }}
-				</p>
+				<p>{{ message }}</p>
 			{% endif %}
 
 			<legend>Update your Recipe</legend>
 
 			<form method="POST" action="{{ router.generate('editRecipe', {'id': recipe.id}) }}">
+				<label for="title">Title</label><br>
+				<input type="text" id="title" name="title" value="{{ recipe.title }}" placeholder="Enter the name of your recipe here"><br>
 
-				<label for="title">Title</label>
-				<br>
-				<input type="text" id="title" name="title" value="{{ recipe.title }}" placeholder="Enter the name of your recipe here">
-				<br>
-				<label for="slug">Slug</label>
-				<br>
-				<input type="text" id="slug" name="slug" value="{{ recipe.slug }}" placeholder="Enter the slug of your recipe here">
-				<br>
-				<label for="duration">Edit Time:</label>
-				<br>
-				<input type="text" id="duration" name="duration" value="{{ recipe.duration }}" placeholder="Time in hours or minutes">
-				<br>
-				<label for="content">Edit your recipe</label>
-				<br>
-				<textarea id="content" name="content" placeholder="Write your recipe here">{{ recipe.content }}</textarea>
-				<br>
+				<label for="slug">Slug</label><br>
+				<input type="text" id="slug" name="slug" value="{{ recipe.slug }}" placeholder="Enter the slug of your recipe here"><br>
+
+				<label for="duration">Edit Time:</label><br>
+				<input type="text" id="duration" name="duration" value="{{ recipe.duration }}" placeholder="Time in hours or minutes"><br>
+
+				<label for="content">Edit your recipe</label><br>
+				<textarea id="content" name="content" placeholder="Write your recipe here">{{ recipe.content }}</textarea><br>
+
 				{% if error %}
 					<p>{{ error }}</p>
 				{% endif %}
+
+				{% for ingredient in recipe.ingredients %}
+					<form method="POST" action="{{ router.generate('addIngredient') }}">
+						<label for="name">Nom de l'ingrédient :</label>
+						<input type="text" id="name" name="name" required>
+
+						<label for="quantity">Quantité :</label>
+						<input type="text" id="quantity" name="quantity" required>
+
+						<input type="submit" value="Ajouter l'ingrédient">
+					</form>
+				{% endfor %}
+
+				<button id="openModalBtn">Ajouter un ingrédient</button>
+
+				<div id="ingredientModal" class="modal">
+					<div class="modal-content">
+						<span class="close">&times;</span>
+						<input type="text" id="searchInput" placeholder="Rechercher un ingrédient">
+						<ul id="ingredientList"><!-- Les ingrédients seront ajoutés dynamiquement ici --></ul>
+						<button id="validateBtn">Valider la recette</button>
+					</div>
+				</div>
+
 				<input type="submit" name="submit" value="Submit">
 			</form>
 		</fieldset>
 	</div>
-
 {% endblock %}

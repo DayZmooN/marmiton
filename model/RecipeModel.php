@@ -5,7 +5,7 @@ class RecipeModel extends Model
     public function getAllRecipes()
     {
         $recipes = [];
-        $req = $this->getDb()->query('SELECT `id_recipes`, `title`, `duration`, `slug`, `userid`,`content`,`thumbnail` FROM `recipes` ORDER BY `id_recipes`');
+        $req = $this->getDb()->query('SELECT `id_recipes`, `title`, `duration`, `slug`, `userid`,`content`,`thumbnail` FROM `recipes` ORDER BY `id_recipes` ');
         while ($recipe = $req->fetch(PDO::FETCH_ASSOC)) {
             $recipes[] = new Recipes($recipe);
         }
@@ -61,16 +61,6 @@ class RecipeModel extends Model
 
 
 
-    public function getIngredients($id)
-    {
-        $req = $this->getDb()->prepare("SELECT `id`, `name` FROM `ingredients` WHERE `id`= :id");
-        $req->bindParam('id', $id, PDO::PARAM_INT);
-        $req->execute();
-        $ingredient = $req->fetch(PDO::FETCH_ASSOC);
-
-        // Retourne l'ingrédient s'il existe, sinon retourne false
-        return $ingredient ? new Ingredients($ingredient) : false;
-    }
 
     public function getDeleteRecipe($recipeId)
     {
@@ -100,7 +90,16 @@ class RecipeModel extends Model
     }
 
 
+    public function getIngredientByName($name)
+    {
+        $req = $this->getDb()->prepare("SELECT `id`, `name` FROM `ingredients` WHERE `name`= :name");
+        $req->bindParam('name', $name, PDO::PARAM_STR);
+        $req->execute();
+        $ingredient = $req->fetch(PDO::FETCH_ASSOC);
 
+        // Retourne l'ingrédient s'il existe, sinon retourne false
+        return $ingredient ? new Ingredients($ingredient) : false;
+    }
 
     public function editRecipe(Recipes $recipe)
     {

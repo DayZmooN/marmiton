@@ -125,6 +125,8 @@ class RecipeController extends Controller
     public function addRecipe()
     {
         global $router;
+        $model = new RecipeModel();
+        $modelIngredient = new IngredientsModel();
 
         if (!isset($_SESSION['id'])) {
             header('Location: ' . $router->generate('baseRegistrationInscription'));
@@ -149,10 +151,24 @@ class RecipeController extends Controller
                         $ingredientName = $_POST['ingredient' . $i];
                         $ingredientQuantity = $_POST['quantity' . $i];
                         if (!empty($ingredientName) && !empty($ingredientQuantity)) {
-                            $ingredients[] = [
-                                'name' => $ingredientName,
-                                'quantity' => $ingredientQuantity
-                            ];
+                            $ingredient = $modelIngredient->getIngredientByName($ingredientName);
+                            if ($ingredient) {
+                                $ingredients[] = [
+                                    'id' => $ingredient->getId(),
+                                    'name' => $ingredient->getName(),
+                                    'quantity' => $ingredientQuantity
+                                ];
+                            } else {
+                                // Si l'ingrédient n'existe pas, vous pouvez le créer et récupérer son nouvel ID ici
+                                // Puis ajoutez-le au tableau d'ingrédients
+
+                                $newIngredientId = $modelIngredient->createIngredient($ingredientName);
+                                $ingredients[] = [
+                                    'id' => $newIngredientId,
+                                    'name' => $ingredientName,
+                                    'quantity' => $ingredientQuantity
+                                ];
+                            }
                         }
                     }
 
@@ -167,7 +183,6 @@ class RecipeController extends Controller
                         'ingredients' => $ingredients
                     ]);
 
-                    $model = new RecipeModel();
                     $model->addRecipe($recipe);
                     header('Location: ' . $router->generate('account'));
                     exit;

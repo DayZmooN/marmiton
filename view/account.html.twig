@@ -1,15 +1,11 @@
 {% extends "template.html.twig" %}
 
-
 {% block title %}
 	{{ app.session.get('username') }}'s Account
 {% endblock %}
 
-{# {% block headerblock %}
-	{% include 'header.html.twig' with {'categories': cats } %}
-{% endblock %} #}
 {% block content %}
-	Bienvenue
+	<h1>Bienvenue</h1>
 	{{ session.username }}
 
 	<a href="{{ path('addRecipe') }}">Add a recipe</a>
@@ -26,9 +22,20 @@
 				<li>
 					<p>{{ recipe.content }}</p>
 				</li>
+				<li>
+					{% for ingredient in recipe.ingredients %}
+						<p>{{ ingredient.name }}:
+							{{ ingredient.quantity }}</p>
+					{% endfor %}
+				</li>
+				<ul>
+					{% for ingredient in ingredients %}
+						<li>{{ ingredient.name }}</li>
+						<li>{{ ingredient.quantity }}</li>
+					{% endfor %}
+				</ul>
 				<div>
 					<button>
-
 						<a href="{{ path('editRecipe') }}{{ recipe.id_recipes }}">Edit</a>
 					</form>
 				</button>
