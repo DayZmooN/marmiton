@@ -59,6 +59,9 @@ $router->map('GET|POST', '/edit/[i:id_recipe]', 'RecipeController#editRecipe', '
 //error
 $router->map('GET', '/error', 'ErrorController#error', 'error');
 
+//ingredient
+$router->map('GET', '/recipe/{id_recipe}/ingredients', 'RecipeController#getIngredientsByRecipeId', 'ingredient');
+
 
 
 
